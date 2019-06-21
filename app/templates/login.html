@@ -31,6 +31,10 @@
                         {{ form.password(class="form-field") }}
                     {% endif %}
                 </div>
+                <div id="remember">
+                    {{ form.remember(class="checkbox") }}
+                    {{ form.remember.label() }}
+                </div>
             </fieldset>
             <div>
                 {{ form.submit(class="button") }}

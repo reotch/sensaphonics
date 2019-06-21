@@ -7,7 +7,7 @@ def load_user(customer_id):
 
 # ---------- [ Models ] ---------- #
 # create models
-class Product(db.Model, UserMixin):
+class Product(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     model = db.Column(db.String(50), unique=True, nullable=False)
     description = db.Column(db.String(250), nullable=False)
@@ -28,7 +28,7 @@ class ProductSchema(ma.Schema):
 product_schema = ProductSchema(strict=True)
 products_schema = ProductSchema(many=True, strict=True)
 
-class Customer(db.Model):
+class Customer(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
     first_name = db.Column(db.String(100), nullable=False)
     last_name = db.Column(db.String(100), nullable=False)

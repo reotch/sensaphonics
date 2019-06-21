@@ -63,6 +63,11 @@ input {
     grid-column: 1 / 5;
 }
 
+#remember {
+    display: block;
+    text-align: left;
+}
+
 /* ---------- [ HEADER AND FOOTER ] ---------- */
 header * {
     display: inline;

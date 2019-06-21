@@ -1,8 +1,8 @@
-from flask import render_template, url_for, request, jsonify, flash, redirect
+from flask import render_template, url_for, request, jsonify, flash, redirect, request
 from app import app, db, bcrypt
 from app.forms import RegistrationForm, LoginForm
 from app.models import Product, ProductSchema, Customer, Order
-from flask_login import login_user
+from flask_login import login_user, current_user, logout_user, login_required
 
 # ---------- [ Routes ] ---------- #
 # server/
@@ -15,6 +15,8 @@ def index():
 ''' This registration takes in user registration, adds and commits it to the database. The user registers and is returned to the login screen to log in.'''
 @app.route('/register', methods=['GET', 'POST'])
 def register():
+    if current_user.is_authenticated:
+        return redirect(url_for('index'))
     form = RegistrationForm()
     if form.validate_on_submit():
         hashed_pw = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
@@ -30,17 +32,29 @@ def register():
 def login():
     form = LoginForm()
     if form.validate_on_submit():
-        # if form.email.data == 'xenu@sea.org' and form.password.data == 'password':
-        #     flash('Logged in and schitt')
-        #     return redirect(url_for('index'))
-        # else:
-        customer = Customer.query.filter_by(email = form.email.data).first()
-        if customer and bcrypt.check_password_hash(customer.password, form.password.data):
-            login_user(customer)
-            return redirect(url_for('index'))
+        user = Customer.query.filter_by(email=form.email.data).first()
+        if user and bcrypt.check_password_hash(user.password, form.password.data):
+            login_user(user, remember=form.remember.data)
+            next_page = request.args.get('next')
+            if next_page:
+                return redirect(next_page)
+            else:
+                return redirect(url_for('index'))
         else:
             flash('Nope. Try checking your email and password')
     return render_template('login.html', title='Login', form=form)
+
+@app.route('/logout')
+def logout():
+    logout_user()
+    return redirect(url_for('index'))
+
+
+@app.route('/account')
+@login_required
+def account():
+    return render_template('account.html', title='Account')
+
 
 # Create API route for creating product
 @app.route('/iems', methods = ['GET'])
