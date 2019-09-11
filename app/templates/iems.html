@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    <title>Sensaphonics IEMs</title>
+{% endblock head %}
+
+{% block body %}
+    {% for product in products %}
+        <div class="card-container">
+        
+            
+                
+                    <h5 class="card-title">{{ product['model'] }}</h5>
+                    <img src="{{ product['image'] }}" alt="" class="card-img">
+                    <p class="card-text">${{ product['price'] }}0</p>
+                    <p class="card-text">{{ product['description'] }}</p>
+                    <button class="btn">Go somewhere</button>
+                    
+            
+        
+        </div>
+    {% endfor %}        
+{% endblock body %}

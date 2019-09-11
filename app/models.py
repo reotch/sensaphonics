@@ -12,17 +12,22 @@ class Product(db.Model):
     model = db.Column(db.String(50), unique=True, nullable=False)
     description = db.Column(db.String(250), nullable=False)
     price = db.Column(db.Float, nullable=False)
+    image = db.Column(db.String(512))
     # qty = db.Column(db.Integer)
 
-    def __init__(self, model, description, price):
+    def __init__(self, model, description, price, image):
         self.model = model
         self.description = description
         self.price = price
+        self.image = image
     
 # Product Schema using Marshmallow to serialize
+'''
+These are to be used with a front-end framework
+'''
 class ProductSchema(ma.Schema):
     class Meta: 
-        fields = ('id', 'model', 'description', 'price')
+        fields = ('id', 'model', 'description', 'price', 'image')
 
 # initialize Schema
 product_schema = ProductSchema(strict=True)
@@ -36,9 +41,6 @@ class Customer(db.Model, UserMixin):
     phone_number = db.Column(db.String(10), nullable=False)
     password = db.Column(db.String(60), nullable=False)
     transaction_id = db.relationship('Order', backref = 'transaction number', lazy = 'dynamic')
-
-    # def is_active(self):
-    #     return True
 
     def __repr__(self):
         return f"Customer('{self.first_name} {self.last_name}')"

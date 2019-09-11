@@ -5,5 +5,19 @@
 {% endblock head %}
 
 {% block body %}
-    <h1>{{ current_user.first_name }}</h1>
+<div class="sidekick-image">
+    <div class="customer-info info">
+        <div class="main-left">
+            <h2>{{ current_user.first_name }} {{ current_user.last_name }}</h2>
+        </div>
+        <div class="main-right">
+            <p>Email: {{ current_user.email }}</p>
+            <p>Phone: {{ current_user.phone_number }}</p>
+        </div>
+        <div class="interest">
+            <p>I'm interested in:</p>
+            <p class="interest">Here we want to put anything the user might have marked as being of interest. It should be a list of one or more products. There should be cards of each product herre.</p>
+        </div>
+    </div>
+</div>
 {% endblock body %}

@@ -5,18 +5,79 @@ body, html {
     margin: 0;
     padding: 0;
     font-family: 'Raleway', sans-serif;
+    height: 100%;
+    background-color: rgb(115, 115, 158);
     /* background-image: linear-gradient(to right bottom, lightblue, darkblue); */
+}
+
+/* ---------- [ MAIN CONTAINER ] ---------- */
+.main-container {
+    display: grid;
+    min-height: 100vh;
+    grid-template-rows: 50px repeat(auto) 30px;
 }
 
 /* ---------- [ GRID CONTAINER ] ---------- */
 
 .grid-container {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(4, 1fr);
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    grid-gap: 1em;
     width: 70%;
+    min-height: 100vh;
     margin: 0 auto;
-    background-color: lightgray;
+    /* padding-bottom: 30px; */
+}
+
+h1 {
+    color: whitesmoke;
+    grid-column: 1 / 4;
+    text-align: center;
+    letter-spacing: 3px;
+    font-size: 3em; 
+    margin: 5px;
+}
+h2 {
+    color: whitesmoke;
+    grid-column: 1 / 4;
+    grid-row: 2 / 3;
+    text-align: center;
+    margin: 5px;
+}
+
+.info { 
+    color: whitesmoke;
+    grid-column: 2 / 3;
+    padding: 10px;
+    width: 33%;
+    margin: 2em auto;
+    vertical-align: middle;
+    background-color: rgba(47, 79, 79, 0.35);
+    border-radius: 5px;
+    box-shadow: 2px 2px 7px rgb(30, 48, 48);
+}
+
+/* ---------- [ IMAGES ] ---------- */
+.hero-image {
+    background-image: url("../img/d2.jpg");
+    height: 100%;
+    background-color: #cccccc;
+    background-position: center;
+    background-size: cover;
+    grid-column: 1 / 4;
+    grid-row: 1 / 4;
+}
+
+.sidekick-image {
+    background-image: url("../img/texture-background.jpg");
+    background-color: #cccccc;
+    background-position: center;
+    background-size: cover;
+    grid-column: 1 / 4;
+    grid-row: 1 / 4;
+    /* opacity: 0.2;
+    filter: alpha(opacity=20); */
 }
 
 /* ---------- [ LIST BEHAVIOR ] ---------- */
@@ -36,36 +97,86 @@ a {
 
 /* ---------- [ FORMS ] ---------- */
 
-.form {
-    grid-column: 2 / 4;
-    grid-row: 1 / 3;
-    margin: 20px;
+.sidekick-image > .form {
+    grid-column: 2 / 3;
+    width: 50%;
+    /* grid-row: 1 / 3; */
+    margin: 20px auto;
+    color: whitesmoke;
 }
 
 input {
     width: 100%;
     height: 2em;
+    border-radius: 5px;
+    margin: 10px auto;
 }
 
 .form-lower {
     text-align: center;
 }
 
-.button {
-    display: block;
-    margin: 10px auto;
-    width: 50%;
-    border: 1px solid rgb(138, 138, 138);
-    box-shadow: 3px 4px 8px;
-}
-
 .alert {
     grid-column: 1 / 5;
 }
 
+.muted {
+    color: black;
+}
+
 #remember {
+    display: inline-block;
+}
+
+
+
+/* ---------- [ CARDS FOR PRODUCT ] ---------- */
+h5 {
+    font-size: 1.25em;
+}
+
+.card-container {
+    display: grid;
+    padding: 1rem;
+    grid-template-columns: repeat(autofit, minmax(320px, 1fr));
+    grid-gap: 1rem;
+    box-shadow: 2px 2px 6px rgb(50, 50, 50);
+    border-radius: 7px;
+    margin: 10px;
+    padding: 10px;
+    /* height: 500px; */
+    background-color: lightgray;
+}
+
+.btn {
+    /* display: inline-block;
+    margin: 10px auto;
+    width: 50%;
+    border: 1px solid rgb(138, 138, 138);
+    box-shadow: 3px 4px 8px; */
     display: block;
-    text-align: left;
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.card-title {
+    color: rgb(73, 86, 99);
+}
+
+.card-img {
+    text-align: center;
+    margin: 0 auto;
+}
+
+.card-text {
+    color: rgb(73, 86, 99);
 }
 
 /* ---------- [ HEADER AND FOOTER ] ---------- */
@@ -75,20 +186,32 @@ header * {
 }
 
 header {
+    grid-row: 1 / 2;
     top: 0;
     left: 0;
     right: 0;
     height: 50px;
     padding: 10px 60px;
     background-color: darkgray;
+    box-shadow: 3px 3px 8px darkslategray;
 }
 
 footer {
-    position: sticky;
+
     bottom: 0;
-    height: 50px;
+    left: 0;
+    right: 0;
+    height: 30px;
+    
     padding: 10px 60px;
     background-color: darkgray;
+}
+
+footer > p {
+    /* color: rgb(90, 88, 124);
+    margin-bottom: 20px;
+    padding: 0; */
+    vertical-align: middle;
 }
 
 .right {
